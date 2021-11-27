@@ -6,9 +6,10 @@ const AuthorizationError = require('../../exceptions/AuthorizationError');
 
 // Menangani pengelolaan daftar lagu pada tabel playlists
 class PlaylistsService {
-  constructor(collaborationService) {
+  constructor(collaborationService, cacheService) {
     this._pool = new Pool();
     this._collaborationService = collaborationService;
+    this._cacheService = cacheService;
   }
 
   // Fungsi menambah daftar lagu
@@ -22,7 +23,7 @@ class PlaylistsService {
 
     const { rows, rowCount } = await this._pool.query(query);
 
-    if (!rows[0].id) {
+    if (!rowCount) {
       throw new InvariantError('Gagal menambahkan playlist');
     }
 
@@ -62,9 +63,11 @@ class PlaylistsService {
 
   // Fungsi menambah lagu pada daftar lagu
   async addSongToPlaylist(playlistId, songId) {
+    const id = `playlist-${nanoid(16)}`;
+
     const query = {
-      text: 'INSERT INTO playlistsongs (playlist_id, song_id) VALUES($1, $2) RETURNING id',
-      values: [playlistId, songId],
+      text: 'INSERT INTO playlistsongs (id, playlist_id, song_id) VALUES($1, $2, $3) RETURNING id',
+      values: [id, playlistId, songId],
     };
 
     const { rows, rowCount } = await this._pool.query(query);
@@ -72,22 +75,30 @@ class PlaylistsService {
     if (!rows[0].id) {
       throw new InvariantError('Gagal menambahkan lagu ke playlist');
     }
+    await this._cacheService.delete(`songs:${playlistId}`);
   }
 
   // Fungsi memperoleh lagu dari daftar lagu
   async getSongsFromPlaylist(playlistId) {
-    const query = {
-      text: `SELECT songs.id, songs.title, songs.performer
+    try {
+      // memperoleh catatan dari cache
+      const { rows } = await this._cacheService.get(`songs:${playlistId}`);
+      return JSON.parse(result);
+    } catch (error) { // Bila di cache tidak ada maka diambil dari database
+      const query = {
+        text: `SELECT songs.id, songs.title, songs.performer
         FROM songs
         JOIN playlistsongs
         ON songs.id = playlistsongs.song_id 
         WHERE playlistsongs.playlist_id = $1`,
-      values: [playlistId],
-    };
+        values: [playlistId],
+      };
 
-    const { rows, rowCount } = await this._pool.query(query);
-
-    return rows;
+      const { rows, rowCount } = await this._pool.query(query);
+      // Lagu akan disimpan pada cache sebelum fungsi SongsFromPlaylist dikembalikan
+      await this._cacheService.set(`songs:${playlistId}`, JSON.stringify(rows));
+      return rows;
+    }
   }
 
   // Fungsi menghapus lagu dari daftar lagu
@@ -102,6 +113,7 @@ class PlaylistsService {
     if (!rowCount) {
       throw new InvariantError('Gagal menghapus lagu');
     }
+    await this._cacheService.delete(`songs:${playlistId}`);
   }
 
   // Fungsi memverifikasi pemilik daftar lagu
@@ -136,6 +148,15 @@ class PlaylistsService {
         throw error;
       }
     }
+  }
+
+  async getUsersByUsername(username) {
+    const query = {
+      text: 'SELECT id, username, fullname FROM users WHERE username LIKE $1',
+      values: [`%${username}%`],
+    };
+    const { rows } = await this._pool.query(query);
+    return rows;
   }
 }
 

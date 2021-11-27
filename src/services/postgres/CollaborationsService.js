@@ -4,8 +4,9 @@ const InvariantError = require('../../exceptions/InvariantError');
 
 // Menangani pengelolaan data pada tabel collaborations
 class CollaborationsService {
-  constructor() {
+  constructor(cacheService) {
     this._pool = new Pool();
+    this._cacheService = cacheService;
   }
 
   // Fungsi untuk menambahkan kolaborasi
@@ -17,12 +18,12 @@ class CollaborationsService {
       values: [id, playlistId, userId],
     };
 
-    const result = await this._pool.query(query);
+    const { rows, rowCount } = await this._pool.query(query);
 
-    if (!result.rows.length) {
+    if (!rowCount) {
       throw new InvariantError('Gagal menambahkan kolaborasi');
     }
-    return result.rows[0].id;
+    return rows[0].id;
   }
 
   // Fungsi untuk enghapus kolaborasi
@@ -32,11 +33,12 @@ class CollaborationsService {
       values: [playlistId, userId],
     };
 
-    const result = await this._pool.query(query);
+    const { rows, rowCount } = await this._pool.query(query);
 
-    if (!result.rows.length) {
+    if (!rowCount) {
       throw new InvariantError('Gagal menghapus kolaborasi');
     }
+    await this._cacheService.delete(`songs:${playlistId}`);
   }
 
   // Fungsi untuk memeriksa apakah user merupakan kolaborator
@@ -46,9 +48,9 @@ class CollaborationsService {
       values: [playlistId, userId],
     };
 
-    const result = await this._pool.query(query);
+    const { rows } = await this._pool.query(query);
 
-    if (!result.rows.length) {
+    if (!rowCount) {
       throw new InvariantError('Gagal memverifikasi kolaborasi');
     }
   }

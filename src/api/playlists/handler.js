@@ -10,6 +10,7 @@ class PlaylistsHandler {
     this.postSongHandler = this.postSongHandler.bind(this);
     this.getSongsHandler = this.getSongsHandler.bind(this);
     this.deleteSongByIdHandler = this.deleteSongByIdHandler.bind(this);
+    this.getUsersByUsernameHandler = this.getUsersByUsernameHandler.bind(this);
   }
 
   // Fungsi menambahkan pengelolaan daftar lagu
@@ -129,6 +130,21 @@ class PlaylistsHandler {
       return {
         status: 'success',
         message: 'Lagu berhasil dihapus dari playlist',
+      };
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getUsersByUsernameHandler(request, h) {
+    try {
+      const { username = '' } = request.query;
+      const users = await this._service.getUsersByUsername(username);
+      return {
+        status: 'success',
+        data: {
+          users,
+        },
       };
     } catch (error) {
       return error;

@@ -13,14 +13,11 @@ class SongsHandler {
   }
 
   // API dapat menyimpan lagu
-  async postSongHandler(request, h) {
+  async postSongHandler({ payload }, h) {
     try {
-      this._validator.validateSongPayload(request.payload);
-      const {
-        title, year, performer, genre, duration,
-      } = request.payload;
+      this._validator.validateSongPayload(payload);
 
-      const songId = await this._service.addSong(request.payload);
+      const songId = await this._service.addSong(payload);
 
       const response = h.response({
         status: 'success',

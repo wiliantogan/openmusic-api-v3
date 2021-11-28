@@ -23,7 +23,7 @@ class PlaylistsService {
 
     const { rows, rowCount } = await this._pool.query(query);
 
-    if (!rowCount) {
+    if (!rows[0].id) {
       throw new InvariantError('Gagal menambahkan playlist');
     }
 
@@ -42,7 +42,7 @@ class PlaylistsService {
       values: [user],
     };
 
-    const { rows, rowCount } = await this._pool.query(query);
+    const { rows } = await this._pool.query(query);
 
     return rows;
   }
@@ -54,7 +54,7 @@ class PlaylistsService {
       values: [id],
     };
 
-    const { rows, rowCount } = await this._pool.query(query);
+    const { rowCount } = await this._pool.query(query);
 
     if (!rowCount) {
       throw new NotFoundError('Gagal menghapus playlist. Tidak menemukan Id');
@@ -63,19 +63,18 @@ class PlaylistsService {
 
   // Fungsi menambah lagu pada daftar lagu
   async addSongToPlaylist(playlistId, songId) {
-    const id = `playlist-${nanoid(16)}`;
-
     const query = {
-      text: 'INSERT INTO playlistsongs (id, playlist_id, song_id) VALUES($1, $2, $3) RETURNING id',
-      values: [id, playlistId, songId],
+      text: 'INSERT INTO playlistsongs (playlist_id, song_id) VALUES($1, $2) RETURNING id',
+      values: [playlistId, songId],
     };
 
-    const { rows, rowCount } = await this._pool.query(query);
+    const { rows } = await this._pool.query(query);
 
     if (!rows[0].id) {
       throw new InvariantError('Gagal menambahkan lagu ke playlist');
     }
     await this._cacheService.delete(`songs:${playlistId}`);
+    return rows[0].id;
   }
 
   // Fungsi memperoleh lagu dari daftar lagu
@@ -83,7 +82,7 @@ class PlaylistsService {
     try {
       // memperoleh catatan dari cache
       const { rows } = await this._cacheService.get(`songs:${playlistId}`);
-      return JSON.parse(result);
+      return JSON.parse(rows);
     } catch (error) { // Bila di cache tidak ada maka diambil dari database
       const query = {
         text: `SELECT songs.id, songs.title, songs.performer
@@ -94,7 +93,7 @@ class PlaylistsService {
         values: [playlistId],
       };
 
-      const { rows, rowCount } = await this._pool.query(query);
+      const { rows } = await this._pool.query(query);
       // Lagu akan disimpan pada cache sebelum fungsi SongsFromPlaylist dikembalikan
       await this._cacheService.set(`songs:${playlistId}`, JSON.stringify(rows));
       return rows;
@@ -108,7 +107,7 @@ class PlaylistsService {
       values: [playlistId, songId],
     };
 
-    const { rows, rowCount } = await this._pool.query(query);
+    const { rowCount } = await this._pool.query(query);
 
     if (!rowCount) {
       throw new InvariantError('Gagal menghapus lagu');

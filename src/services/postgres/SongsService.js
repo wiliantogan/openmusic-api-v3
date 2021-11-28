@@ -82,9 +82,9 @@ class SongsService {
       values: [id],
     };
 
-    const result = await this._pool.query(query);
+    const { rowCount } = await this._pool.query(query);
 
-    if (!result.rows.length) {
+    if (!rowCount) {
       throw new NotFoundError('Gagal menghapus lagu. Tidak menemukan Id');
     }
   }

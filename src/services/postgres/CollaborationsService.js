@@ -33,7 +33,7 @@ class CollaborationsService {
       values: [playlistId, userId],
     };
 
-    const { rows, rowCount } = await this._pool.query(query);
+    const { rowCount } = await this._pool.query(query);
 
     if (!rowCount) {
       throw new InvariantError('Gagal menghapus kolaborasi');
@@ -48,7 +48,7 @@ class CollaborationsService {
       values: [playlistId, userId],
     };
 
-    const { rows } = await this._pool.query(query);
+    const { rowCount } = await this._pool.query(query);
 
     if (!rowCount) {
       throw new InvariantError('Gagal memverifikasi kolaborasi');

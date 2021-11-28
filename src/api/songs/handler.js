@@ -49,9 +49,9 @@ class SongsHandler {
   }
 
   // API dapat menampilkan detail lagu
-  async getSongByIdHandler(request, h) {
+  async getSongByIdHandler({ params }, h) {
     try {
-      const { id } = request.params;
+      const { id } = params;
       const song = await this._service.getSongById(id);
       return {
         status: 'success',
@@ -65,12 +65,12 @@ class SongsHandler {
   }
 
   // API dapat mengubah data lagu
-  async putSongByIdHandler(request, h) {
+  async putSongByIdHandler({ payload, params }, h) {
     try {
-      this._validator.validateSongPayload(request.payload);
-      const { id } = request.params;
+      this._validator.validateSongPayload(payload);
+      const { id } = params;
 
-      await this._service.editSongById(id, request.payload);
+      await this._service.editSongById(id, payload);
 
       return {
         status: 'success',
@@ -82,9 +82,9 @@ class SongsHandler {
   }
 
   // API dapat menghapus lagu
-  async deleteSongByIdHandler(request, h) {
+  async deleteSongByIdHandler({ params }, h) {
     try {
-      const { id } = request.params;
+      const { id } = params;
       await this._service.deleteSongById(id);
       return {
         status: 'success',

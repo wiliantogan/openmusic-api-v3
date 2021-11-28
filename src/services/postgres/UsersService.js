@@ -21,12 +21,12 @@ class UsersService {
       values: [id, username, hashedPassword, fullname],
     };
 
-    const result = await this._pool.query(query);
+    const { rows, rowCount } = await this._pool.query(query);
 
-    if (!result.rows.length) {
+    if (!rowCount) {
       throw new InvariantError('Gagal menambahkan pengguna');
     }
-    return result.rows[0].id;
+    return rows[0].id;
   }
 
   // Fungsi memverifikasi nama pengguna baru
@@ -36,9 +36,9 @@ class UsersService {
       values: [username],
     };
 
-    const result = await this._pool.query(query);
+    const { rowCount } = await this._pool.query(query);
 
-    if (result.rows.length > 0) {
+    if (rowCount > 0) {
       throw new InvariantError('User gagal ditambahkan. username sudah digunakan.');
     }
   }
@@ -50,13 +50,13 @@ class UsersService {
       values: [userId],
     };
 
-    const result = await this._pool.query(query);
+    const { rows, rowCount } = await this._pool.query(query);
 
-    if (!result.rows.length) {
+    if (!rowCount) {
       throw new NotFoundError('Tidak menemukan user');
     }
 
-    return result.rows[0];
+    return rows[0];
   }
 
   // Fungsi memperoleh pengguna dari username
@@ -65,8 +65,8 @@ class UsersService {
       text: 'SELECT id, username, fullname FROM users WHERE username LIKE $1',
       values: [`%${username}%`],
     };
-    const result = await this._pool.query(query);
-    return result.rows;
+    const { rows } = await this._pool.query(query);
+    return rows;
   }
 
   // Fungsi memverifikasi kredensial pengguna
@@ -76,13 +76,13 @@ class UsersService {
       values: [username],
     };
 
-    const result = await this._pool.query(query);
+    const { rows, rowCount } = await this._pool.query(query);
 
-    if (!result.rows.length) {
+    if (!rowCount) {
       throw new AuthenticationError('Anda memberikan kredensial yang salah');
     }
 
-    const { id, password: hashedPassword } = result.rows[0];
+    const { id, password: hashedPassword } = rows[0];
 
     const match = await bcrypt.compare(password, hashedPassword);
 

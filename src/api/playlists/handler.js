@@ -14,11 +14,11 @@ class PlaylistsHandler {
   }
 
   // Fungsi menambahkan pengelolaan daftar lagu
-  async postPlaylistHandler(request, h) {
+  async postPlaylistHandler({ payload, auth }, h) {
     try {
-      this._validator.validatePostPlaylistPayload(request.payload);
-      const { name } = request.payload;
-      const { id: credentialId } = request.auth.credentials;
+      this._validator.validatePostPlaylistPayload(payload);
+      const { name } = payload;
+      const { id: credentialId } = auth.credentials;
 
       const playlistId = await this._service.addPlaylist({
         name,
@@ -40,9 +40,9 @@ class PlaylistsHandler {
   }
 
   // Fungsi memperoleh pengelolaan daftar lagu
-  async getPlaylistsHandler(request) {
+  async getPlaylistsHandler({ auth }) {
     try {
-      const { id: credentialId } = request.auth.credentials;
+      const { id: credentialId } = auth.credentials;
       const playlists = await this._service.getPlaylists(credentialId);
       return {
         status: 'success',
@@ -57,10 +57,10 @@ class PlaylistsHandler {
   }
 
   // Fungsi menghapus daftar lagu dengan pengelolaan Id
-  async deletePlaylistByIdHandler(request, h) {
+  async deletePlaylistByIdHandler({ params, auth }, h) {
     try {
-      const { playlistId } = request.params;
-      const { id: credentialId } = request.auth.credentials;
+      const { playlistId } = params;
+      const { id: credentialId } = auth.credentials;
 
       await this._service.verifyPlaylistOwner(playlistId, credentialId);
       await this._service.deletePlaylistById(playlistId);
@@ -75,12 +75,12 @@ class PlaylistsHandler {
   }
 
   // Fungsi menambahkan lagu ke daftar lagu
-  async postSongHandler(request, h) {
+  async postSongHandler({ params, payload, auth }, h) {
     try {
-      this._validator.validatePostSongPayload(request.payload);
-      const { playlistId } = request.params;
-      const { songId } = request.payload;
-      const { id: credentialId } = request.auth.credentials;
+      this._validator.validatePostSongPayload(payload);
+      const { playlistId } = params;
+      const { songId } = payload;
+      const { id: credentialId } = auth.credentials;
 
       await this._service.verifyPlaylistAccess(playlistId, credentialId);
 
@@ -98,10 +98,10 @@ class PlaylistsHandler {
   }
 
   // Fungsi memperoleh pengelolaan daftar lagu
-  async getSongsHandler(request, h) {
+  async getSongsHandler({ params, auth }, h) {
     try {
-      const { playlistId } = request.params;
-      const { id: credentialId } = request.auth.credentials;
+      const { playlistId } = params;
+      const { id: credentialId } = auth.credentials;
 
       await this._service.verifyPlaylistAccess(playlistId, credentialId);
 
@@ -118,11 +118,11 @@ class PlaylistsHandler {
   }
 
   // Fungsi menghapus lagu dari daftar lagu dengan pengelolaan Id
-  async deleteSongByIdHandler(request, h) {
+  async deleteSongByIdHandler({ params, payload, auth }, h) {
     try {
-      const { playlistId } = request.params;
-      const { songId } = request.payload;
-      const { id: credentialId } = request.auth.credentials;
+      const { playlistId } = params;
+      const { songId } = payload;
+      const { id: credentialId } = auth.credentials;
 
       await this._service.verifyPlaylistAccess(playlistId, credentialId);
       await this._service.deleteSongFromPlaylist(playlistId, songId);
@@ -136,9 +136,9 @@ class PlaylistsHandler {
     }
   }
 
-  async getUsersByUsernameHandler(request, h) {
+  async getUsersByUsernameHandler({ query }, h) {
     try {
-      const { username = '' } = request.query;
+      const { username = '' } = query;
       const users = await this._service.getUsersByUsername(username);
       return {
         status: 'success',

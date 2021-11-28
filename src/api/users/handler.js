@@ -32,9 +32,9 @@ class UsersHandler {
     }
   }
 
-  async getUserByIdHandler(request, h) {
+  async getUserByIdHandler({ params }, h) {
     try {
-      const { id } = request.params;
+      const { id } = params;
       const song = await this._service.getSongById(id);
       return {
         status: 'success',
@@ -48,9 +48,9 @@ class UsersHandler {
   }
 
   // Fungsi memperoleh user dengan pengelolaan username
-  async getUsersByUsernameHandler(request, h) {
+  async getUsersByUsernameHandler({ query }, h) {
     try {
-      const { username = '' } = request.query;
+      const { username = '' } = query;
       const users = await this._service.getUsersByUsername(username);
       return {
         status: 'success',

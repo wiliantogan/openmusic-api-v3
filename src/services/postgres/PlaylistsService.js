@@ -21,7 +21,7 @@ class PlaylistsService {
       values: [id, name, owner],
     };
 
-    const { rows, rowCount } = await this._pool.query(query);
+    const { rows } = await this._pool.query(query);
 
     if (!rows[0].id) {
       throw new InvariantError('Gagal menambahkan playlist');

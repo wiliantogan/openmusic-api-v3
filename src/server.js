@@ -175,23 +175,6 @@ const init = async () => {
       if (statusCode === 401) {
         return h.response(payload).code(401);
       }
-      const newResponse = h.response({
-        status: 'error',
-        message: 'Maaf, terjadi kegagalan pada server kami.',
-      });
-      console.log(response);
-      newResponse.code(500);
-      return newResponse;
-    }
-
-    // Server Error!
-    if (response instanceof Error) {
-      const newResponse = h.response({
-        status: 'error',
-        message: response.output.payload.message,
-      });
-      newResponse.code(response.output.statuscode);
-      return newResponse;
     }
 
     // jika bukan ClientError, lanjutkan dengan response sebelumnya (tanpa terintervensi)

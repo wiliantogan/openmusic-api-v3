@@ -1,7 +1,7 @@
 {
-	"id": "e76cca65-077f-44cf-8d49-f1156e9e03b7",
+	"id": "8ffc42ee-2ee2-45d2-bba4-98827848bdd9",
 	"name": "OpenMusic API V3 Test",
-	"timestamp": "2021-11-28T14:43:36.755Z",
+	"timestamp": "2021-11-29T00:19:33.499Z",
 	"collection_id": "17080873-48e951e5-539a-47a7-b031-15b222e6f0d1",
 	"folder_id": 0,
 	"environment_id": "e2eab813-dbdd-4ebb-8247-fed792810015",
@@ -12,7 +12,7 @@
 			"id": "368b0b87-084b-4305-ab16-a51aa0e5d62e",
 			"name": "Adding Song with Valid Payload",
 			"url": "http://localhost:5000/songs",
-			"time": 712,
+			"time": 669,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -42,7 +42,7 @@
 				}
 			},
 			"times": [
-				712
+				669
 			],
 			"allTests": [
 				{
@@ -56,7 +56,7 @@
 		{
 			"id": "3e840945-3c4f-48e9-8087-fa1e333361cd",
 			"name": "Adding Song with Bad Payload",
-			"time": 8,
+			"time": 9,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -86,13 +86,13 @@
 				}
 			},
 			"times": [
-				13,
-				6,
-				7,
+				8,
+				8,
+				8,
 				9,
 				8,
-				7,
-				8
+				9,
+				9
 			],
 			"allTests": [
 				{
@@ -143,7 +143,7 @@
 			"id": "dfa9b092-3560-45c1-9129-de52b01fb64c",
 			"name": "Getting All Songs",
 			"url": "http://localhost:5000/songs",
-			"time": 8,
+			"time": 9,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -178,7 +178,7 @@
 				}
 			},
 			"times": [
-				8
+				9
 			],
 			"allTests": [
 				{
@@ -193,7 +193,7 @@
 		{
 			"id": "61cbd1b6-bdcd-4cec-88af-8c5d36310fb6",
 			"name": "Getting Specified Song",
-			"url": "http://localhost:5000/songs/song-23dQefjYvQG53zTd",
+			"url": "http://localhost:5000/songs/song-lnQ0mx8qvgyQIxNf",
 			"time": 8,
 			"responseCode": {
 				"code": 200,
@@ -245,7 +245,7 @@
 			"id": "2368a199-c946-4f41-a633-7f16aa939be9",
 			"name": "Getting Specified Song with Bad songId",
 			"url": "http://localhost:5000/songs/xxxx",
-			"time": 8,
+			"time": 6,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -270,7 +270,7 @@
 				}
 			},
 			"times": [
-				8
+				6
 			],
 			"allTests": [
 				{
@@ -283,8 +283,8 @@
 		{
 			"id": "b687f50b-eebc-499d-b19b-913945ce1646",
 			"name": "Update Song with Valid Payload",
-			"url": "http://localhost:5000/songs/song-23dQefjYvQG53zTd",
-			"time": 9,
+			"url": "http://localhost:5000/songs/song-lnQ0mx8qvgyQIxNf",
+			"time": 16,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -319,7 +319,7 @@
 				}
 			},
 			"times": [
-				9
+				16
 			],
 			"allTests": [
 				{
@@ -364,12 +364,12 @@
 				}
 			},
 			"times": [
-				5,
+				7,
+				8,
+				8,
 				8,
 				7,
-				6,
-				6,
-				9,
+				12,
 				8
 			],
 			"allTests": [
@@ -421,6 +421,45 @@
 			"id": "8c682d23-b755-4d9e-afd0-c4b337749761",
 			"name": "Update Song with Bad songId",
 			"url": "http://localhost:5000/songs/xxxx",
+			"time": 11,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"response status code should 404": true,
+				"response Content-Type should application/json": true,
+				"response body shoud contains correct value": true
+			},
+			"testPassFailCounts": {
+				"response status code should 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response Content-Type should application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response body shoud contains correct value": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"response status code should 404": true,
+					"response Content-Type should application/json": true,
+					"response body shoud contains correct value": true
+				}
+			]
+		},
+		{
+			"id": "579929c3-8d07-471c-af10-f416b3f8dfa6",
+			"name": "Delete Song with Bad songId",
+			"url": "http://localhost:5000/songs/xxxx",
 			"time": 8,
 			"responseCode": {
 				"code": 404,
@@ -457,49 +496,10 @@
 			]
 		},
 		{
-			"id": "579929c3-8d07-471c-af10-f416b3f8dfa6",
-			"name": "Delete Song with Bad songId",
-			"url": "http://localhost:5000/songs/xxxx",
-			"time": 6,
-			"responseCode": {
-				"code": 404,
-				"name": "Not Found"
-			},
-			"tests": {
-				"response status code should 404": true,
-				"response Content-Type should application/json": true,
-				"response body shoud contains correct value": true
-			},
-			"testPassFailCounts": {
-				"response status code should 404": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response Content-Type should application/json": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response body shoud contains correct value": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				6
-			],
-			"allTests": [
-				{
-					"response status code should 404": true,
-					"response Content-Type should application/json": true,
-					"response body shoud contains correct value": true
-				}
-			]
-		},
-		{
 			"id": "f887ed30-30f4-46c6-8cce-b5e8be280bd0",
 			"name": "Delete Song with Valid Payload",
-			"url": "http://localhost:5000/songs/song-23dQefjYvQG53zTd",
-			"time": 22,
+			"url": "http://localhost:5000/songs/song-lnQ0mx8qvgyQIxNf",
+			"time": 19,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -534,7 +534,7 @@
 				}
 			},
 			"times": [
-				22
+				19
 			],
 			"allTests": [
 				{
@@ -550,7 +550,7 @@
 			"id": "3dde142b-601c-4aa2-b1d5-32c118efa2a1",
 			"name": "Add Users with Valid Payload",
 			"url": "http://localhost:5000/users",
-			"time": 414,
+			"time": 264,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -585,7 +585,7 @@
 				}
 			},
 			"times": [
-				414
+				264
 			],
 			"allTests": [
 				{
@@ -601,7 +601,7 @@
 			"id": "7a94d7d9-4758-464e-bb25-d9646f2711e0",
 			"name": "Add User with Exists Username",
 			"url": "http://localhost:5000/users",
-			"time": 10,
+			"time": 11,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -626,7 +626,7 @@
 				}
 			},
 			"times": [
-				10
+				11
 			],
 			"allTests": [
 				{
@@ -639,7 +639,7 @@
 		{
 			"id": "ec9f4440-c384-432b-b9fc-f7193406e079",
 			"name": "Add User with Bad Payload",
-			"time": 42,
+			"time": 6,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -665,12 +665,12 @@
 			},
 			"times": [
 				6,
-				8,
 				5,
-				8,
 				6,
 				5,
-				42
+				6,
+				7,
+				6
 			],
 			"allTests": [
 				{
@@ -714,7 +714,7 @@
 			"id": "fbd07a9e-71f9-40ae-8704-a6582e68343d",
 			"name": "Post Authentications with Valid Credentials",
 			"url": "http://localhost:5000/authentications",
-			"time": 235,
+			"time": 192,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -744,7 +744,7 @@
 				}
 			},
 			"times": [
-				235
+				192
 			],
 			"allTests": [
 				{
@@ -759,7 +759,7 @@
 			"id": "fa864dfc-2014-4ea5-88ef-964ec2701c36",
 			"name": "Post Authentications with Invalid Credentials",
 			"url": "http://localhost:5000/authentications",
-			"time": 106,
+			"time": 103,
 			"responseCode": {
 				"code": 401,
 				"name": "Unauthorized"
@@ -784,7 +784,7 @@
 				}
 			},
 			"times": [
-				106
+				103
 			],
 			"allTests": [
 				{
@@ -822,10 +822,10 @@
 				}
 			},
 			"times": [
+				5,
+				7,
 				7,
 				6,
-				6,
-				5,
 				6
 			],
 			"allTests": [
@@ -860,7 +860,7 @@
 			"id": "cd990d17-a37d-4e22-89a4-f94276e4a371",
 			"name": "Put Authentications with Valid Refresh Token",
 			"url": "http://localhost:5000/authentications",
-			"time": 8,
+			"time": 10,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -890,7 +890,7 @@
 				}
 			},
 			"times": [
-				8
+				10
 			],
 			"allTests": [
 				{
@@ -904,6 +904,84 @@
 		{
 			"id": "47fd58a2-d712-49b7-8446-c60d8977eb0e",
 			"name": "Put Authentications with Invalid Refresh Token",
+			"url": "http://localhost:5000/authentications",
+			"time": 10,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"response status code should be 400": true,
+				"response Content-Type header should have application/json value": true,
+				"response body should have correct value": true
+			},
+			"testPassFailCounts": {
+				"response status code should be 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response Content-Type header should have application/json value": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response body should have correct value": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"response status code should be 400": true,
+					"response Content-Type header should have application/json value": true,
+					"response body should have correct value": true
+				}
+			]
+		},
+		{
+			"id": "11feced7-8596-4d00-a790-7f826983fe50",
+			"name": "Delete Authentications with Valid Refresh Token",
+			"url": "http://localhost:5000/authentications",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response status code should be 200": true,
+				"response Content-Type header should have application/json value": true,
+				"response body should have correct value": true
+			},
+			"testPassFailCounts": {
+				"response status code should be 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response Content-Type header should have application/json value": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response body should have correct value": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"response status code should be 200": true,
+					"response Content-Type header should have application/json value": true,
+					"response body should have correct value": true
+				}
+			]
+		},
+		{
+			"id": "27fe3a2f-efad-4d6a-94fd-5d0818e9b419",
+			"name": "Delete Authentications with Invalid Refresh Token",
 			"url": "http://localhost:5000/authentications",
 			"time": 7,
 			"responseCode": {
@@ -941,88 +1019,10 @@
 			]
 		},
 		{
-			"id": "11feced7-8596-4d00-a790-7f826983fe50",
-			"name": "Delete Authentications with Valid Refresh Token",
-			"url": "http://localhost:5000/authentications",
-			"time": 14,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"response status code should be 200": true,
-				"response Content-Type header should have application/json value": true,
-				"response body should have correct value": true
-			},
-			"testPassFailCounts": {
-				"response status code should be 200": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response Content-Type header should have application/json value": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response body should have correct value": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				14
-			],
-			"allTests": [
-				{
-					"response status code should be 200": true,
-					"response Content-Type header should have application/json value": true,
-					"response body should have correct value": true
-				}
-			]
-		},
-		{
-			"id": "27fe3a2f-efad-4d6a-94fd-5d0818e9b419",
-			"name": "Delete Authentications with Invalid Refresh Token",
-			"url": "http://localhost:5000/authentications",
-			"time": 6,
-			"responseCode": {
-				"code": 400,
-				"name": "Bad Request"
-			},
-			"tests": {
-				"response status code should be 400": true,
-				"response Content-Type header should have application/json value": true,
-				"response body should have correct value": true
-			},
-			"testPassFailCounts": {
-				"response status code should be 400": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response Content-Type header should have application/json value": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response body should have correct value": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				6
-			],
-			"allTests": [
-				{
-					"response status code should be 400": true,
-					"response Content-Type header should have application/json value": true,
-					"response body should have correct value": true
-				}
-			]
-		},
-		{
 			"id": "02a1d005-82af-400c-bed9-d2ac1c3256bf",
 			"name": "[No Test] Add Song for Playlist",
 			"url": "http://localhost:5000/songs",
-			"time": 9,
+			"time": 8,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1030,7 +1030,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				9
+				8
 			],
 			"allTests": [
 				{}
@@ -1040,7 +1040,7 @@
 			"id": "b32597d3-8eef-4cda-aba6-f7f372436c3d",
 			"name": "[No Test] Add Users A",
 			"url": "http://localhost:5000/users",
-			"time": 101,
+			"time": 112,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1048,7 +1048,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				101
+				112
 			],
 			"allTests": [
 				{}
@@ -1058,7 +1058,7 @@
 			"id": "cf42ff7e-fad3-47d5-804a-f8121535c1e4",
 			"name": "[No Test] Add Users B",
 			"url": "http://localhost:5000/users",
-			"time": 107,
+			"time": 116,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1066,7 +1066,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				107
+				116
 			],
 			"allTests": [
 				{}
@@ -1076,7 +1076,7 @@
 			"id": "0815569a-aefb-4b2d-8799-273d52ed47b7",
 			"name": "[No Test] User A Post Authentication",
 			"url": "http://localhost:5000/authentications",
-			"time": 105,
+			"time": 114,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1084,7 +1084,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				105
+				114
 			],
 			"allTests": [
 				{}
@@ -1094,7 +1094,7 @@
 			"id": "a6852356-4257-4cf3-a94a-60f80250603b",
 			"name": "[No Test] User B Post Authentication",
 			"url": "http://localhost:5000/authentications",
-			"time": 102,
+			"time": 104,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1102,7 +1102,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				102
+				104
 			],
 			"allTests": [
 				{}
@@ -1112,7 +1112,7 @@
 			"id": "d66560a2-2507-487d-9c8c-83011e43cfcc",
 			"name": "Add Playlist without Authorizations",
 			"url": "http://localhost:5000/playlists",
-			"time": 9,
+			"time": 12,
 			"responseCode": {
 				"code": 401,
 				"name": "Unauthorized"
@@ -1132,7 +1132,7 @@
 				}
 			},
 			"times": [
-				9
+				12
 			],
 			"allTests": [
 				{
@@ -1145,7 +1145,7 @@
 			"id": "c4f2958a-16e8-468d-9bd0-12d1145c71c6",
 			"name": "Add Playlist using User A",
 			"url": "http://localhost:5000/playlists",
-			"time": 645,
+			"time": 665,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1175,7 +1175,7 @@
 				}
 			},
 			"times": [
-				645
+				665
 			],
 			"allTests": [
 				{
@@ -1190,7 +1190,7 @@
 			"id": "22cbf34b-b74f-4ad9-8117-c1960f7e1da6",
 			"name": "Add Playlist using User B",
 			"url": "http://localhost:5000/playlists",
-			"time": 9,
+			"time": 7,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1220,7 +1220,7 @@
 				}
 			},
 			"times": [
-				9
+				7
 			],
 			"allTests": [
 				{
@@ -1235,7 +1235,7 @@
 			"id": "1ff1e425-a4e8-49e7-9563-65cfe63a4e70",
 			"name": "Get All Playlist using User A",
 			"url": "http://localhost:5000/playlists",
-			"time": 11,
+			"time": 12,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -1270,7 +1270,7 @@
 				}
 			},
 			"times": [
-				11
+				12
 			],
 			"allTests": [
 				{
@@ -1336,8 +1336,8 @@
 		{
 			"id": "106c2b5d-213c-414b-80c1-36294a48d15d",
 			"name": "Add Song to User A Playlist using User A",
-			"url": "http://localhost:5000/playlists/playlist-klaJv99MHGV7kL_k/songs",
-			"time": 18,
+			"url": "http://localhost:5000/playlists/playlist-xVUgwiU0nEQ9IiQY/songs",
+			"time": 21,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1362,7 +1362,7 @@
 				}
 			},
 			"times": [
-				18
+				21
 			],
 			"allTests": [
 				{
@@ -1375,7 +1375,7 @@
 		{
 			"id": "f5d8c75a-83b4-4e48-930d-51e44f4ba1ff",
 			"name": "Add Song to User B Playlist using User B",
-			"url": "http://localhost:5000/playlists/playlist-F2rz2rDkIxsxcJQn/songs",
+			"url": "http://localhost:5000/playlists/playlist-hY2uoo7UZQ1PMC7X/songs",
 			"time": 9,
 			"responseCode": {
 				"code": 201,
@@ -1414,8 +1414,8 @@
 		{
 			"id": "c537d65e-9514-4455-ba14-287c75ee7e29",
 			"name": "Add Song to User A Playlist using User B",
-			"url": "http://localhost:5000/playlists/playlist-klaJv99MHGV7kL_k/songs",
-			"time": 130,
+			"url": "http://localhost:5000/playlists/playlist-xVUgwiU0nEQ9IiQY/songs",
+			"time": 156,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -1440,7 +1440,7 @@
 				}
 			},
 			"times": [
-				130
+				156
 			],
 			"allTests": [
 				{
@@ -1453,8 +1453,8 @@
 		{
 			"id": "4959cc6a-2ad6-4c48-beee-7fe78a8ec31c",
 			"name": "Get All Songs from User A Playlist using User A",
-			"url": "http://localhost:5000/playlists/playlist-klaJv99MHGV7kL_k/songs",
-			"time": 15,
+			"url": "http://localhost:5000/playlists/playlist-xVUgwiU0nEQ9IiQY/songs",
+			"time": 9,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -1489,7 +1489,7 @@
 				}
 			},
 			"times": [
-				15
+				9
 			],
 			"allTests": [
 				{
@@ -1504,8 +1504,8 @@
 		{
 			"id": "4cd7ccc8-5420-4032-a825-46947d41db19",
 			"name": "Get All Songs from User B Playlist using User B",
-			"url": "http://localhost:5000/playlists/playlist-F2rz2rDkIxsxcJQn/songs",
-			"time": 10,
+			"url": "http://localhost:5000/playlists/playlist-hY2uoo7UZQ1PMC7X/songs",
+			"time": 51,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -1540,7 +1540,7 @@
 				}
 			},
 			"times": [
-				10
+				51
 			],
 			"allTests": [
 				{
@@ -1555,46 +1555,7 @@
 		{
 			"id": "47770252-2708-4ff5-a4eb-df4cf67fb9b9",
 			"name": "Get All Songs from User A Playlist using User B",
-			"url": "http://localhost:5000/playlists/playlist-klaJv99MHGV7kL_k/songs",
-			"time": 8,
-			"responseCode": {
-				"code": 403,
-				"name": "Forbidden"
-			},
-			"tests": {
-				"response status code should be 403": true,
-				"response Content-Type header should have application/json value": true,
-				"response body should have correct value": true
-			},
-			"testPassFailCounts": {
-				"response status code should be 403": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response Content-Type header should have application/json value": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response body should have correct value": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				8
-			],
-			"allTests": [
-				{
-					"response status code should be 403": true,
-					"response Content-Type header should have application/json value": true,
-					"response body should have correct value": true
-				}
-			]
-		},
-		{
-			"id": "86aefe30-0a17-464d-9dba-75794a8cc241",
-			"name": "Delete Song from User A Playlist using User B",
-			"url": "http://localhost:5000/playlists/playlist-klaJv99MHGV7kL_k/songs",
+			"url": "http://localhost:5000/playlists/playlist-xVUgwiU0nEQ9IiQY/songs",
 			"time": 9,
 			"responseCode": {
 				"code": 403,
@@ -1631,9 +1592,48 @@
 			]
 		},
 		{
+			"id": "86aefe30-0a17-464d-9dba-75794a8cc241",
+			"name": "Delete Song from User A Playlist using User B",
+			"url": "http://localhost:5000/playlists/playlist-xVUgwiU0nEQ9IiQY/songs",
+			"time": 8,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"response status code should be 403": true,
+				"response Content-Type header should have application/json value": true,
+				"response body should have correct value": true
+			},
+			"testPassFailCounts": {
+				"response status code should be 403": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response Content-Type header should have application/json value": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response body should have correct value": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"response status code should be 403": true,
+					"response Content-Type header should have application/json value": true,
+					"response body should have correct value": true
+				}
+			]
+		},
+		{
 			"id": "780f8d66-8a7b-4450-82b0-abd43dd914fe",
 			"name": "Delete Song from User A Playlist using User A",
-			"url": "http://localhost:5000/playlists/playlist-klaJv99MHGV7kL_k/songs",
+			"url": "http://localhost:5000/playlists/playlist-xVUgwiU0nEQ9IiQY/songs",
 			"time": 9,
 			"responseCode": {
 				"code": 200,
@@ -1672,7 +1672,7 @@
 		{
 			"id": "e5333085-9f52-464f-8e09-12a80bd10d11",
 			"name": "Delete Song from User B Playlist using User B",
-			"url": "http://localhost:5000/playlists/playlist-F2rz2rDkIxsxcJQn/songs",
+			"url": "http://localhost:5000/playlists/playlist-hY2uoo7UZQ1PMC7X/songs",
 			"time": 9,
 			"responseCode": {
 				"code": 200,
@@ -1711,8 +1711,8 @@
 		{
 			"id": "6050756c-5d5d-4586-b10f-464df9c4c6ce",
 			"name": "Delete Song from Playlist using Invalid SongId",
-			"url": "http://localhost:5000/playlists/playlist-F2rz2rDkIxsxcJQn/songs",
-			"time": 6,
+			"url": "http://localhost:5000/playlists/playlist-hY2uoo7UZQ1PMC7X/songs",
+			"time": 7,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -1737,7 +1737,7 @@
 				}
 			},
 			"times": [
-				6
+				7
 			],
 			"allTests": [
 				{
@@ -1750,8 +1750,8 @@
 		{
 			"id": "11a26deb-83c6-4462-afb6-8df92ffcc17d",
 			"name": "Delete User A Playlist using User B",
-			"url": "http://localhost:5000/playlists/playlist-klaJv99MHGV7kL_k",
-			"time": 8,
+			"url": "http://localhost:5000/playlists/playlist-xVUgwiU0nEQ9IiQY",
+			"time": 6,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -1776,7 +1776,7 @@
 				}
 			},
 			"times": [
-				8
+				6
 			],
 			"allTests": [
 				{
@@ -1789,8 +1789,8 @@
 		{
 			"id": "0c4b1bd3-99a8-4b80-b1d7-9dc54a1393a0",
 			"name": "Delete User A Playlist using User A",
-			"url": "http://localhost:5000/playlists/playlist-klaJv99MHGV7kL_k",
-			"time": 10,
+			"url": "http://localhost:5000/playlists/playlist-xVUgwiU0nEQ9IiQY",
+			"time": 11,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -1815,7 +1815,7 @@
 				}
 			},
 			"times": [
-				10
+				11
 			],
 			"allTests": [
 				{
@@ -1828,8 +1828,8 @@
 		{
 			"id": "ef457d68-3345-4b13-87c3-dcd05b1e5557",
 			"name": "Delete User B Playlist using User B",
-			"url": "http://localhost:5000/playlists/playlist-F2rz2rDkIxsxcJQn",
-			"time": 7,
+			"url": "http://localhost:5000/playlists/playlist-hY2uoo7UZQ1PMC7X",
+			"time": 8,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -1854,7 +1854,7 @@
 				}
 			},
 			"times": [
-				7
+				8
 			],
 			"allTests": [
 				{
@@ -1886,7 +1886,7 @@
 			"id": "ca4fb995-bcd7-49ad-95b1-bcdcd1c368f7",
 			"name": "[No Test] Add Users X",
 			"url": "http://localhost:5000/users",
-			"time": 106,
+			"time": 105,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1894,7 +1894,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				106
+				105
 			],
 			"allTests": [
 				{}
@@ -1904,7 +1904,7 @@
 			"id": "defa1662-d59b-45a2-9f97-a2a3f13b11c5",
 			"name": "[No Test] Add Users Y",
 			"url": "http://localhost:5000/users",
-			"time": 113,
+			"time": 104,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1912,7 +1912,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				113
+				104
 			],
 			"allTests": [
 				{}
@@ -1922,7 +1922,7 @@
 			"id": "a3f63aa0-778a-496d-9701-fda647f4ff60",
 			"name": "[No Test] User X Post Authentication",
 			"url": "http://localhost:5000/authentications",
-			"time": 139,
+			"time": 109,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -1930,7 +1930,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				139
+				109
 			],
 			"allTests": [
 				{}
@@ -2003,7 +2003,7 @@
 			"id": "4a361ade-590c-4c45-97be-d895bb638d33",
 			"name": "[Optional] Add User Y as Collaborator in User X Playlist using User X",
 			"url": "http://localhost:5000/collaborations",
-			"time": 30,
+			"time": 33,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -2028,7 +2028,7 @@
 				}
 			},
 			"times": [
-				30
+				33
 			],
 			"allTests": [
 				{
@@ -2092,8 +2092,8 @@
 		{
 			"id": "b15d7d63-e531-45e0-aefa-0acb71749989",
 			"name": "[Optional] Add Songs to User X Playlist using User Y",
-			"url": "http://localhost:5000/playlists/playlist-8EV2UPOEExjeK4z8/songs",
-			"time": 8,
+			"url": "http://localhost:5000/playlists/playlist-X5NL7_S-3zV5dJOf/songs",
+			"time": 10,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -2118,7 +2118,7 @@
 				}
 			},
 			"times": [
-				8
+				10
 			],
 			"allTests": [
 				{
@@ -2131,7 +2131,7 @@
 		{
 			"id": "b3f89644-6036-46c4-86a4-7cb4bc146d7d",
 			"name": "[Optional] Get Songs from User X Playlist using User Y",
-			"url": "http://localhost:5000/playlists/playlist-8EV2UPOEExjeK4z8/songs",
+			"url": "http://localhost:5000/playlists/playlist-X5NL7_S-3zV5dJOf/songs",
 			"time": 9,
 			"responseCode": {
 				"code": 200,
@@ -2176,8 +2176,8 @@
 		{
 			"id": "52dd4e75-0f0e-4209-bd36-22106536417b",
 			"name": "[Optional] Delete Songs to User X Playlist using User Y",
-			"url": "http://localhost:5000/playlists/playlist-8EV2UPOEExjeK4z8/songs",
-			"time": 10,
+			"url": "http://localhost:5000/playlists/playlist-X5NL7_S-3zV5dJOf/songs",
+			"time": 8,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -2202,7 +2202,7 @@
 				}
 			},
 			"times": [
-				10
+				8
 			],
 			"allTests": [
 				{
@@ -2215,64 +2215,7 @@
 		{
 			"id": "a15eb296-bada-4d57-b56e-32e0138051a6",
 			"name": "[Optional] Delete User X Playlist using User Y",
-			"url": "http://localhost:5000/playlists/playlist-8EV2UPOEExjeK4z8",
-			"time": 7,
-			"responseCode": {
-				"code": 403,
-				"name": "Forbidden"
-			},
-			"tests": {
-				"response status code should be 403": true,
-				"response Content-Type header should have application/json value": true,
-				"response body should have correct value": true
-			},
-			"testPassFailCounts": {
-				"response status code should be 403": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response Content-Type header should have application/json value": {
-					"pass": 1,
-					"fail": 0
-				},
-				"response body should have correct value": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				7
-			],
-			"allTests": [
-				{
-					"response status code should be 403": true,
-					"response Content-Type header should have application/json value": true,
-					"response body should have correct value": true
-				}
-			]
-		},
-		{
-			"id": "ec0862b1-e75d-4dd3-8025-ce56e07aa53e",
-			"name": "[Optional] Remove User Y as Collaborator in User X Playlist using User X",
-			"url": "http://localhost:5000/collaborations",
-			"time": 8,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {},
-			"testPassFailCounts": {},
-			"times": [
-				8
-			],
-			"allTests": [
-				{}
-			]
-		},
-		{
-			"id": "3c97c450-3162-41b3-b7c4-31d1082201ef",
-			"name": "[Optional] Get Songs from User X Playlist using User Y",
-			"url": "http://localhost:5000/playlists/playlist-8EV2UPOEExjeK4z8/songs",
+			"url": "http://localhost:5000/playlists/playlist-X5NL7_S-3zV5dJOf",
 			"time": 9,
 			"responseCode": {
 				"code": 403,
@@ -2309,10 +2252,28 @@
 			]
 		},
 		{
-			"id": "34f7a889-6ec4-4196-9cdd-a7026b2cb45d",
-			"name": "[Optional] Add User Y as Collaborator in User X Playlist Using User Y",
+			"id": "ec0862b1-e75d-4dd3-8025-ce56e07aa53e",
+			"name": "[Optional] Remove User Y as Collaborator in User X Playlist using User X",
 			"url": "http://localhost:5000/collaborations",
 			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3c97c450-3162-41b3-b7c4-31d1082201ef",
+			"name": "[Optional] Get Songs from User X Playlist using User Y",
+			"url": "http://localhost:5000/playlists/playlist-X5NL7_S-3zV5dJOf/songs",
+			"time": 8,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -2337,7 +2298,46 @@
 				}
 			},
 			"times": [
-				7
+				8
+			],
+			"allTests": [
+				{
+					"response status code should be 403": true,
+					"response Content-Type header should have application/json value": true,
+					"response body should have correct value": true
+				}
+			]
+		},
+		{
+			"id": "34f7a889-6ec4-4196-9cdd-a7026b2cb45d",
+			"name": "[Optional] Add User Y as Collaborator in User X Playlist Using User Y",
+			"url": "http://localhost:5000/collaborations",
+			"time": 8,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"response status code should be 403": true,
+				"response Content-Type header should have application/json value": true,
+				"response body should have correct value": true
+			},
+			"testPassFailCounts": {
+				"response status code should be 403": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response Content-Type header should have application/json value": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response body should have correct value": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
 			],
 			"allTests": [
 				{
@@ -2395,8 +2395,8 @@
 		{
 			"id": "7b984776-7644-45cd-bc9a-51de573821b3",
 			"name": "[Optional] Add Songs to User X Playlist using User Y",
-			"url": "http://localhost:5000/playlists/playlist-8EV2UPOEExjeK4z8/songs",
-			"time": 8,
+			"url": "http://localhost:5000/playlists/playlist-X5NL7_S-3zV5dJOf/songs",
+			"time": 7,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -2421,7 +2421,7 @@
 				}
 			},
 			"times": [
-				8
+				7
 			],
 			"allTests": [
 				{
@@ -2434,8 +2434,8 @@
 		{
 			"id": "ef2089ca-a5f4-4df9-9e21-98ad74d8d511",
 			"name": "[Optional] Delete Songs to User X Playlist using User Y",
-			"url": "http://localhost:5000/playlists/playlist-8EV2UPOEExjeK4z8/songs",
-			"time": 10,
+			"url": "http://localhost:5000/playlists/playlist-X5NL7_S-3zV5dJOf/songs",
+			"time": 6,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -2460,7 +2460,7 @@
 				}
 			},
 			"times": [
-				10
+				6
 			],
 			"allTests": [
 				{
@@ -2492,7 +2492,7 @@
 			"id": "44962905-0055-4b25-a659-88763dc3ddc3",
 			"name": "[No Test] Add User Export",
 			"url": "http://localhost:5000/users",
-			"time": 101,
+			"time": 106,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -2500,7 +2500,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				101
+				106
 			],
 			"allTests": [
 				{}
@@ -2509,6 +2509,78 @@
 		{
 			"id": "a9138bfb-4aac-4f76-b5ee-75adb9e9d7cd",
 			"name": "[No Test] User Export Post Authentication",
+			"url": "http://localhost:5000/authentications",
+			"time": 107,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				107
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "18d3cbe7-2e40-429d-9020-a73f2ebea119",
+			"name": "[No Test] Create Playlist for Export",
+			"url": "http://localhost:5000/playlists",
+			"time": 9,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ee3a027a-7a24-43b0-8c6f-fca1fae9fc13",
+			"name": "[No Test] Add Song to Playlist",
+			"url": "http://localhost:5000/playlists/playlist-IbwNdBV-wXYNwGR9/songs",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "709950c2-0b09-4bf2-89d0-78f6dbd3f69a",
+			"name": "[No Test] Add User Generic",
+			"url": "http://localhost:5000/users",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "52117cc9-4372-4d55-83b0-8a7f89ef578e",
+			"name": "[No Test] User Generic Authentication",
 			"url": "http://localhost:5000/authentications",
 			"time": 105,
 			"responseCode": {
@@ -2525,82 +2597,10 @@
 			]
 		},
 		{
-			"id": "18d3cbe7-2e40-429d-9020-a73f2ebea119",
-			"name": "[No Test] Create Playlist for Export",
-			"url": "http://localhost:5000/playlists",
-			"time": 6,
-			"responseCode": {
-				"code": 201,
-				"name": "Created"
-			},
-			"tests": {},
-			"testPassFailCounts": {},
-			"times": [
-				6
-			],
-			"allTests": [
-				{}
-			]
-		},
-		{
-			"id": "ee3a027a-7a24-43b0-8c6f-fca1fae9fc13",
-			"name": "[No Test] Add Song to Playlist",
-			"url": "http://localhost:5000/playlists/playlist-Lz4RqqOtHb8wv58I/songs",
-			"time": 9,
-			"responseCode": {
-				"code": 201,
-				"name": "Created"
-			},
-			"tests": {},
-			"testPassFailCounts": {},
-			"times": [
-				9
-			],
-			"allTests": [
-				{}
-			]
-		},
-		{
-			"id": "709950c2-0b09-4bf2-89d0-78f6dbd3f69a",
-			"name": "[No Test] Add User Generic",
-			"url": "http://localhost:5000/users",
-			"time": 6,
-			"responseCode": {
-				"code": 400,
-				"name": "Bad Request"
-			},
-			"tests": {},
-			"testPassFailCounts": {},
-			"times": [
-				6
-			],
-			"allTests": [
-				{}
-			]
-		},
-		{
-			"id": "52117cc9-4372-4d55-83b0-8a7f89ef578e",
-			"name": "[No Test] User Generic Authentication",
-			"url": "http://localhost:5000/authentications",
-			"time": 101,
-			"responseCode": {
-				"code": 201,
-				"name": "Created"
-			},
-			"tests": {},
-			"testPassFailCounts": {},
-			"times": [
-				101
-			],
-			"allTests": [
-				{}
-			]
-		},
-		{
 			"id": "5b6c25c4-a9ff-4c5c-ac52-afe9c51c7bc3",
 			"name": "Export Playlist with Valid Email",
-			"url": "http://localhost:5000/exports/playlists/playlist-Lz4RqqOtHb8wv58I",
-			"time": 40,
+			"url": "http://localhost:5000/exports/playlists/playlist-IbwNdBV-wXYNwGR9",
+			"time": 33,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -2625,7 +2625,7 @@
 				}
 			},
 			"times": [
-				40
+				33
 			],
 			"allTests": [
 				{
@@ -2638,8 +2638,8 @@
 		{
 			"id": "db112dde-c5cf-47a1-a590-717edd202a90",
 			"name": "Export Playlist with Valid Invalid Email",
-			"url": "http://localhost:5000/exports/playlists/playlist-Lz4RqqOtHb8wv58I",
-			"time": 10,
+			"url": "http://localhost:5000/exports/playlists/playlist-IbwNdBV-wXYNwGR9",
+			"time": 7,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -2664,7 +2664,7 @@
 				}
 			},
 			"times": [
-				10
+				7
 			],
 			"allTests": [
 				{
@@ -2677,7 +2677,7 @@
 		{
 			"id": "146079ea-6309-4e65-9438-e874302a54a2",
 			"name": "Export Playlist with User Generic",
-			"url": "http://localhost:5000/exports/playlists/playlist-Lz4RqqOtHb8wv58I",
+			"url": "http://localhost:5000/exports/playlists/playlist-IbwNdBV-wXYNwGR9",
 			"time": 10,
 			"responseCode": {
 				"code": 403,
@@ -2716,7 +2716,7 @@
 		{
 			"id": "50d22117-5a8c-450a-826c-23089f141835",
 			"name": "Export Playlist without Authentication",
-			"url": "http://localhost:5000/exports/playlists/playlist-Lz4RqqOtHb8wv58I",
+			"url": "http://localhost:5000/exports/playlists/playlist-IbwNdBV-wXYNwGR9",
 			"time": 6,
 			"responseCode": {
 				"code": 401,
@@ -2748,7 +2748,7 @@
 		}
 	],
 	"count": 1,
-	"totalTime": 4146,
+	"totalTime": 3975,
 	"collection": {
 		"requests": [
 			{
